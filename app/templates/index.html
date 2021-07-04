@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class='container'>
+    <div class='header'>
+        <div class='navbar'>
+        </div>
+        <div class='searchbar-box'>
+            <input class='searchbar'>
+            <input type='button' class='searchbar-button' value='Search'>
+        </div>
+    </div>
+    <div class='content-box'>
+        <div class='content'>
+            <div id='user-1' class='user'>
+                <img src='{{ url_for("static", filename="img/profile_pic.png") }}'>
+                <div class='userpage' id='userpage-1'>
+                    <div class='userpage-content'>
+
+                    </div>
+                    <!-- Live vievers wyswietlac, socketio -->
+                    <!-- Laczna ilosc klikniec zbierac -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

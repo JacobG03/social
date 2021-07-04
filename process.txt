@@ -1,0 +1,34 @@
+User:
+id !
+username !
+email !
+password - hashed properly !
+avatar - chosen by user (link, png) or default
+status - true / false, determines of the user is displayed as online or not
+
+
+
+
+1. Make a good working user input (check javascript (detects letter, sends request searching for results
+     returns results and is displayed properly - hopefully this process is really quick and smooth, if 
+        not, when user clicks enter))
+
+2. Think of the user 
+
+
+# To do
+# learn github and heroku
+# think of a way to display users and their page properly
+        has to be scalable af
+
+
+
+--- different thing
+zrobic w js for loopa co tworzy co 1 px fade w rogu diva wiekszego
+naklada co iteracje -1px diva w lekko innym kolorze
+napisac full na powaznie
+i powrzucac na fora na reddita
+ez punkty
+
+transition (fade) dodac
+
