@@ -32,3 +32,19 @@ ez punkty
 
 transition (fade) dodac
 
+
+
+
+TODO
+Poprawic API i search engine
+Defaultowo 100 osob wyswietlac, jak bedzie wiecej to trza kliknac
+i dorenderuje
+
+
+On hover display small transparent window with name and if online
+
+
+IMPORTRANT
+when you search and just type it filters by users already displayed
+if search button or enter clicked it searches and displays
+new users

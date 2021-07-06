@@ -29,7 +29,7 @@ def defaultUsers():
             "hobbies": user.hobbies,
             "paramaters": user.paramaters,
             "profile_image": user.profile_image, #! Links
-            "background_image": user.background_image, #! Links
+            "background_image": user.background_image, #! Delete
             "facebook": user.facebook,
             "twitter": user.twitter,
             "youtube": user.youtube,

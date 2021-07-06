@@ -1,22 +1,19 @@
 // Get default user data
-const getData = async () => {
-    let users = []
+var users_data = []
+const getDefaultData = async () => {
     try {
         const response = await fetch('http://127.0.0.1:5000/api/users')
         const data = await response.json()
-        users = data
-
         // Call function to render users inside
-        renderUsers(users);
-
+        for (let i = 0; i < data.length; i++) {
+            users_data.push(data[i]);
+        }
     } catch (error) {
         console.log(error)
     }
 }
 
-
-let users = getData();
-
+getDefaultData();
 
 // Display users
 function renderUsers (users) {
@@ -33,6 +30,8 @@ function renderUsers (users) {
         let user_profile_box = document.createElement('div');
         user_profile_box.className = 'user_profile_box';
         user_profile_box.id = 'user_profile_box-' + users[i].id;
+        user_profile_box.classList.add('animate__animated', 'animate__fadeInUp');
+        user_profile_box.addEventListener('click', displayUserPage.bind(event, users[i].id), false)
         user.appendChild(user_profile_box);
 
         // If user is online create div (circle blue color)
@@ -44,12 +43,14 @@ function renderUsers (users) {
         // Create profile img from link
         let user_img = document.createElement('img');
         user_img.src = users[i].profile_image; 
+        user_img.id = 'user-img-' + users[i].id;
         user_profile_box.appendChild(user_img)
 
         // Userpage div container
         let userpage = document.createElement('div');
         userpage.className = 'userpage';
         userpage.id = 'userpage-' + users[i].id;
+        userpage.classList.add('animate__animated', 'animate__backInUp');
         user.appendChild(userpage);
 
         // Userpage content container
@@ -71,6 +72,7 @@ function renderUsers (users) {
         let arrow_img = document.createElement('img');
         arrow_img.className = 'left-arrow-img';
         arrow_img.src = window.location.href + 'static/img/button-icons/left-arrow.png';
+        arrow_img.addEventListener('click', lastUserpage, false)
         arrow_box_left.appendChild(arrow_img);
 
         // Middle content
@@ -100,6 +102,7 @@ function renderUsers (users) {
 
         let username_span = document.createElement('span');
         username_span.innerHTML = users[i].username;
+        username_span.className = 'username';
         username_box.appendChild(username_span);
 
         let location_box = document.createElement('div');
@@ -133,6 +136,7 @@ function renderUsers (users) {
 
         let close_box = document.createElement('div');
         close_box.className = 'close-box';
+        close_box.addEventListener('click', hideUserPageOnX, false)
         right_side_content.appendChild(close_box);
 
         let close_image = document.createElement('img');
@@ -147,6 +151,7 @@ function renderUsers (users) {
         let arrow_image = document.createElement('img');
         arrow_image.className = 'right-arrow-img';
         arrow_image.src = window.location.href + 'static/img/button-icons/right-arrow.png';
+        arrow_image.addEventListener('click', nextUserpage, false);
         arrow_box.appendChild(arrow_image);
 
         // Social media container
@@ -193,8 +198,6 @@ function renderUsers (users) {
 }
 
 
-
-
 // Functions for display and hiding the user page
 // Has to be window.onload or will return elements as null
 
@@ -215,8 +218,9 @@ var state = {
 var displayUserPage = function (user_id) {
     let userpage = 'userpage-' + user_id;
     let userpage_element = document.getElementById(userpage);
-    
-    // If userpage already opened close it and open another one
+
+    let user_img = document.getElementById('user-img-' + user_id);
+    user_img.style.borderRadius = '50px';
     
     // close window if user clicks on him self again
     if (state.current == userpage && state.displayed == true) {
@@ -242,16 +246,27 @@ var lastUserpage = function () {
     // TODO
     // get array of userpages
     let userpages = document.getElementsByClassName('userpage');
+    
     // find location of current open userpage in that array
     for (let i = 0; i < userpages.length; i++) {
         if (userpages[i].id == state.current) {
             // hide it and show a new userpage of index -1 in that array
             if (i != 0) {
                 let current_userpage = document.getElementById(state.current);
+                let current_user_img = document.getElementById('user-img-' + state.current.split('-')[1]);
+                current_user_img.style.borderRadius = '8px';
+                current_userpage.classList.remove('animate__fadeInLeft', 'animate__fadeInRight')
                 current_userpage.classList.toggle('display-block');
+
                 let new_userpage = document.getElementById(userpages[i - 1].id);
+                new_userpage.classList.add('animate__animated', 'animate__fadeInLeft');
                 new_userpage.classList.toggle('display-block');
+                
                 state.current = userpages[i - 1].id;
+
+                let new_user_img = document.getElementById('user-img-' + state.current.split('-')[1]);
+                new_user_img.style.borderRadius = '50px';
+                new_user_img.scrollIntoView({block: "center"});
                 break;
             }
         } 
@@ -264,45 +279,105 @@ var nextUserpage = function () {
         if (userpages[i].id == state.current) {
             if (i < userpages.length) {
                 let current_userpage = document.getElementById(state.current);
-                let new_userpage = document.getElementById(userpages[i + 1].id);
+                let current_user_img = document.getElementById('user-img-' + state.current.split('-')[1]);
+                current_user_img.style.borderRadius = '8px';
+                current_userpage.classList.remove('animate__fadeInLeft', 'animate__fadeInRight')
                 current_userpage.classList.toggle('display-block');
+                
+                let new_userpage = document.getElementById(userpages[i + 1].id);
+                new_userpage.classList.add('animate__animated', 'animate__fadeInRight');
                 new_userpage.classList.toggle('display-block');
+                
                 state.current = userpages[i + 1].id;
+
+                let new_user_img = document.getElementById('user-img-' + state.current.split('-')[1]);
+                new_user_img.style.borderRadius = '50px';
+                new_user_img.scrollIntoView({block: "center"});
                 break;
             }
         } 
     }
 }
 
-renderUsers(users);
-
-window.onload = function() {
-    // Listen for user clicking on user icons
-    let users = document.getElementsByClassName('user_profile_box');
-    for (let i = 0; i < users.length; i++) {
-        var id = users[i].id.split('-')[1]
-        users[i].addEventListener('click', displayUserPage.bind(event, id), false)
-    }
-    // Listen for user click X on userpage
-    let close = document.getElementsByClassName('close-box')
-    for (let i = 0; i < close.length; i++) {
-        close[i].addEventListener('click', hideUserPageOnX, false)
-    }
-    
-    let left_arrows = document.getElementsByClassName('left-arrow-img');
-    let right_arrows = document.getElementsByClassName('right-arrow-img');
-    for (let i = 0; i < left_arrows.length; i++) {
-        left_arrows[i].addEventListener('click', lastUserpage, false)
-    }
-    for (let i = 0; i < right_arrows.length; i++) {
-        right_arrows[i].addEventListener('click', nextUserpage, false)
-    }
-}
 
 var hideUserPageOnX = function () {
     let userpage_element = document.getElementById(state.current);
+    let user_img = document.getElementById('user-img-' + state.current.split('-')[1]);
+    user_img.style.borderRadius = '8px';
     userpage_element.classList.toggle('display-block');
     state.displayed = false;
     state.current = '';
 }
+
+// Arrow input for chaning userpages
+document.addEventListener('keydown', function(event) {
+    if (event.keyCode == 37 && state.displayed) {
+        lastUserpage();
+    }
+    else if (event.keyCode == 39 && state.displayed) {
+        nextUserpage();
+    }
+})
+
+
+function getFilteredUsers(search_string) {
+    let content = document.getElementById('content');
+    let searchbar = document.getElementById('searchbar');
+    state.current = '';
+    state.displayed = false;
+    if (search_string.length == 0 && !content.firstChild) {
+        searchbar.style.color = '#2B7A78';
+        renderUsers(users_data);
+    } else if (search_string.length == 0 && content.children[0].id == 'no-result-box') {
+        clearUsers();
+        renderUsers(users_data);
+    }
+    else if (search_string.length != 0) {
+        const filteredUsers = users_data.filter(user => {
+            return (
+                user.username.toLowerCase().includes(search_string.toLowerCase()) || 
+                user.paramaters.toLowerCase().includes(search_string.toLowerCase()) ||
+                user.location.toLowerCase().includes(search_string.toLowerCase())
+                );
+            });
+        searchbar.style.color = '#2B7A78';
+        clearUsers();
+        renderUsers(filteredUsers)
+    } 
+    if (search_string.length != 0 && !content.firstChild) {
+        // Change input color when nothing shows up
+        searchbar.style.color = '#17252A';
+
+        no_result_box = document.createElement('div');
+        no_result_box.id = 'no-result-box';
+        no_result_box.className = 'no-result-box';
+        no_result_box.classList.add('animate__animated', 'animate__fadeIn');
+        content.appendChild(no_result_box);
+
+        p = document.createElement('p');
+        p.innerHTML = 'No results found.'
+        no_result_box.appendChild(p);
+    }
+}
+
+
+function clearUsers() {
+    let content = document.getElementById('content');
+    while (content.firstChild) {
+        content.firstChild.remove()
+    }
+} 
+
+
+window.onload = function() {
+    renderUsers(users_data);
+
+    // Listen for search input
+    const searchbar = document.getElementById('searchbar');
+
+    searchbar.addEventListener('keyup', e => {
+        const searchString = e.target.value;
+        getFilteredUsers(searchString);
+       });
+    }
 

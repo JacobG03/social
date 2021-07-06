@@ -37,6 +37,12 @@ class User(UserMixin, db.Model):
     twitter = db.Column(db.String(128), nullable=False, default="")
 
 
+    def check_username(self, username):
+        if '-' in username:
+            return False
+        return True
+
+
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
