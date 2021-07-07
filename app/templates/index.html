@@ -16,10 +16,10 @@
             {% if user.is_anonymous %}
             <div class='anonymous-user animate__animated animate__fadeInUp  '>
                 <div class='anonymous-user-content'>
-                    <a class='login-link-box' href='http://127.0.0.1:5000/login'>
+                    <a class='login-link-box' href='{{ url_for("login") }}}'>
                         Sign In
                     </a>
-                    <a class='register-link-box' href='http://127.0.0.1:5000/register'>
+                    <a class='register-link-box' href='{{ url_for("register") }}'>
                         Register
                     </a>
                 </div>
