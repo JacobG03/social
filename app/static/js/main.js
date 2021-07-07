@@ -374,6 +374,7 @@ function clearUsers() {
 
 window.onload = function() {
 
+    renderUsers(users_data);
     // Listen for search input
     const searchbar = document.getElementById('searchbar');
 
@@ -382,7 +383,3 @@ window.onload = function() {
         getFilteredUsers(searchString);
        });
     }
-
-document.addEventListener("DOMContentLoaded", function(event) {
-    renderUsers(users_data);
-});
