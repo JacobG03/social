@@ -373,13 +373,13 @@ function clearUsers() {
 
 
 window.onload = function() {
-    getDefaultData();
-    renderUsers(users_data);
     // Listen for search input
     const searchbar = document.getElementById('searchbar');
-
+    
     searchbar.addEventListener('keyup', e => {
         const searchString = e.target.value;
         getFilteredUsers(searchString);
-       });
+    });
+    
+    renderUsers(users_data);
     }
