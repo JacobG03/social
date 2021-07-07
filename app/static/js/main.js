@@ -8,12 +8,17 @@ const getDefaultData = async () => {
         for (let i = 0; i < data.length; i++) {
             users_data.push(data[i]);
         }
+        renderUsers(data);
     } catch (error) {
         console.log(error)
     }
 }
 
-getDefaultData();
+const retrieveDefaultData = async () => {
+    await getDefaultData();
+}
+
+retrieveDefaultData();
 
 // Display users
 function renderUsers (users) {
@@ -373,6 +378,8 @@ function clearUsers() {
 
 
 window.onload = function() {
+    renderUsers(users_data);
+
     // Listen for search input
     const searchbar = document.getElementById('searchbar');
     
@@ -380,6 +387,4 @@ window.onload = function() {
         const searchString = e.target.value;
         getFilteredUsers(searchString);
     });
-    
-    renderUsers(users_data);
-    }
+}
