@@ -1,10 +1,7 @@
-from functools import reduce
-from typing import final
-
 from flask_login.utils import logout_user
 from app import app, db
 from flask import render_template, request, jsonify, redirect, url_for, flash
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, logout_user
 from app.models import User
 from app.forms import RegistrationForm, LoginForm
 
@@ -42,7 +39,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user is None or not user.check_password(form.password.data):
             return redirect(url_for('login'))
-            
+
         login_user(user, remember=form.remember_me.data)
         return redirect(url_for('index'))
     return render_template('login.html', form=form)
