@@ -378,7 +378,6 @@ function clearUsers() {
 
 
 window.onload = function() {
-
     // Listen for search input
     const searchbar = document.getElementById('searchbar');
     
