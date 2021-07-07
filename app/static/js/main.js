@@ -373,7 +373,6 @@ function clearUsers() {
 
 
 window.onload = function() {
-    renderUsers(users_data);
 
     // Listen for search input
     const searchbar = document.getElementById('searchbar');
@@ -384,3 +383,6 @@ window.onload = function() {
        });
     }
 
+window.onload = function () {
+    renderUsers(users_data);
+}
