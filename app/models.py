@@ -27,7 +27,7 @@ class User(UserMixin, db.Model):
     about_me = db.Column(db.Text, nullable=False, default="")
     hobbies = db.Column(db.Text, nullable=False, default="")
 
-    profile_image = db.Column(db.String(256), nullable=False, default="") 
+    profile_image = db.Column(db.String(256), nullable=False, default="https://avatarfiles.alphacoders.com/101/101741.jpg") 
     background_image = db.Column(db.String(256), nullable=False, default="") #! Delete
     
     # Social Media Links

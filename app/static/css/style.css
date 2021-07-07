@@ -44,6 +44,7 @@ body {
 /* A elements that don't have a class get default styles */
 a:not([class]) {
   text-decoration-skip-ink: auto;
+  text-decoration: none;
 }
 
 /* Make images easier to work with */
@@ -126,7 +127,7 @@ body {
 .container {
 	position: fixed;
     width: 100vw;
-    height: 100%;
+    height: 100vh;
     background-color: var(--blue);
 }
 
@@ -143,6 +144,8 @@ body {
 .navbar {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
+	display: flex;
+	flex-direction: row;
     height: 100%;
     width: 100%;
 }
@@ -154,6 +157,7 @@ body {
     justify-content: center;
     width: 100%;
     height: 100%;
+	margin-top: 30px;
 }
 
 
@@ -195,14 +199,15 @@ body {
 	align-items: center;
 	margin: auto;
     width: 1000px;
-    height: 750px;
+    height: 700px;
+	margin-top: 50px;
 	border-radius: var(--border-radius);
 }
 
 
 .content {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(6, 1fr);
     grid-gap: 10px;
     width: 100%;
@@ -331,7 +336,7 @@ div.userpage {
 }
 
 .arrow-box img:hover {
-	filter: brightness(110%);
+	filter: brightness(120%);
 	cursor: pointer;
 }
 
@@ -425,7 +430,7 @@ div.userpage {
 }
 
 .close-box:hover {
-	filter: brightness(80%);
+	filter:invert(23);
 	cursor: pointer;
 }
 
@@ -442,4 +447,176 @@ div.userpage {
 
 .social-media-content a {
 	margin-inline: 10px;
+}
+
+
+
+/* Box with option to login/register in content when anonymous */
+.anonymous-user {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+.anonymous-user-content {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr 1fr;
+	width: 140px;
+	height: 140px;
+	transition: var(--speed);
+	border: var(--border);
+	border-radius: var(--border-radius);
+}
+
+
+.anonymous-user-content .login-link-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	font-size: 2rem;
+	color: #FEFFFF;
+	transition: var(--speed);
+}
+
+.anonymous-user-content .login-link-box:hover {
+	color: var(--dark);
+}
+
+
+.anonymous-user-content .register-link-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	font-size: 2rem;
+	color: #FEFFFF;
+	transition: var(--speed);
+}
+
+.anonymous-user-content .register-link-box:hover {
+	color: var(--dark);
+}
+
+
+.register-box {
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 600px;
+	height: 800px;
+	top: 50%;
+	left: 50%;
+	margin-top: -400px; /* Negative half of height. */
+	margin-left: -300px; /* Negative half of width. */
+	border: var(--border);
+	border-radius: var(--border-radius);
+	color: #FEFFFF;
+}
+
+.form-header-box {
+	width: 100%;
+	height: 10%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.form-header-box h1 {
+	color: #FEFFFF;
+}
+
+.register-box form {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	height: 90%;
+}
+
+.form-input-box {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	font-size: 2rem;
+}
+
+.form-input-box input {
+	border-radius: var(--border-radius);
+	border: var(--border);
+	width: 500px;
+	height: 3rem;
+	font-size: 1.5rem;
+}
+
+.form-input-box input:focus {
+	outline: none;
+}
+
+.form-input-box span {
+	position: absolute;
+	color: var(--dark);
+	font-size: 1.5rem;
+	display: flex;
+	align-self: center;
+	margin-top: 100px;
+}
+
+.form-submit-box {
+	width: 100%;
+	height: 20%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.form-submit-box input {
+	border-radius: var(--border-radius);
+	border: var(--border);
+	width: 120px;
+	height: 60px;
+}
+
+.form-submit-box input:hover {
+	cursor: pointer;
+}
+
+.form-remember-me {
+	width: 100%;
+	height: 10%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.5rem;
+}
+
+.form-remember-me input {
+	width: 30px;
+	height: 30px;
+}
+
+.form-redirect-box {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.form-redirect-box p {
+	font-size: 1.2rem;
+	color: #17252A;
+}
+
+.form-redirect-box a {
+	font-size: 1.2rem;
+	color: var(--dark);
+}
+
+.form-redirect-box a:hover {
+	color: var(--white);
 }

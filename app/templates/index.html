@@ -3,6 +3,8 @@
 <div class='container'>
     <div class='header'>
         <div class='navbar'>
+            <div class='navbar-header'>
+            </div>
         </div>
         <div class='searchbar-box'>
             <input type='text' class='searchbar' id='searchbar'>
@@ -11,6 +13,18 @@
     </div>
     <div class='content-box'>
         <div class='content' id='content'>
+            {% if user.is_anonymous %}
+            <div class='anonymous-user animate__animated animate__fadeInUp  '>
+                <div class='anonymous-user-content'>
+                    <a class='login-link-box' href='http://127.0.0.1:5000/login'>
+                        Sign In
+                    </a>
+                    <a class='register-link-box' href='http://127.0.0.1:5000/register'>
+                        Register
+                    </a>
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>

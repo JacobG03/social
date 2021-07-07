@@ -11,7 +11,47 @@ from app.forms import RegistrationForm, LoginForm
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    return render_template('index.html')
+    return render_template('index.html', user=current_user)
+
+
+@app.get('/register')
+@app.post('/register')
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data)
+        user.set_password(form.password.data)
+        user.online = True
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('login'))
+    return render_template('register.html', form=form)
+
+
+@app.get('/login')
+@app.post('/login')
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user is None or not user.check_password(form.password.data):
+            return redirect(url_for('login'))
+            
+        login_user(user, remember=form.remember_me.data)
+        return redirect(url_for('index'))
+    return render_template('login.html', form=form)
+
+
+@app.get('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 
 @app.get('/api/users')
@@ -82,43 +122,3 @@ def filteredByParamaters(paramaters):
     return jsonify(final_users)
 
 
-
-@app.get('/register')
-@app.post('/register')
-def register():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
-
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
-        user.set_password(form.password.data)
-        user.online = True
-        db.session.add(user)
-        db.session.commit()
-        flash('Registered')
-        return redirect(url_for('login'))
-    return render_template('register.html', form=form)
-
-
-@app.get('/login')
-@app.post('/login')
-def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
-    
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        if user is None or not user.check_password(form.password.data):
-            flash('Invalid credentials')
-            return redirect(url_for('login'))
-        login_user(user, remember=form.remember_me.data)
-        return redirect(url_for('index'))
-    return render_template('login.html', form=form)
-
-
-@app.get('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('index'))

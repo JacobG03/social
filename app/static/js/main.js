@@ -331,6 +331,9 @@ function getFilteredUsers(search_string) {
     } else if (search_string.length == 0 && content.children[0].id == 'no-result-box') {
         clearUsers();
         renderUsers(users_data);
+    } else if (search_string.length == 0) {
+        clearUsers();
+        renderUsers(users_data);
     }
     else if (search_string.length != 0) {
         const filteredUsers = users_data.filter(user => {
