@@ -273,6 +273,33 @@ body {
 }
 
 
+.navbar-login-box {
+	grid-column: 10 / 11;
+	grid-row: 1 / 2;
+	width: 170px;
+	height: 75px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.navbar-login-box a {
+	width: 170px;
+	height: 75px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: var(--border-radius);
+	transition: var(--speed);
+	color: var(--darker-white);
+	font-size: 2rem;
+}
+
+.navbar-login-box a:hover {
+	background-color: var(--blue2);
+}
+
+
 .searchbar-box {
     display: flex;
     align-items: center;
@@ -584,9 +611,14 @@ div.userpage {
 	grid-template-rows: 1fr;
 	width: 140px;
 	height: 140px;
-	transition: var(--speed);
 	border: var(--border);
 	border-radius: var(--border-radius);
+	background-color: var(--dark-blue);
+	transition: var(--speed);
+}
+
+.anonymous-user-content:hover {
+	background-color: var(--blue);
 }
 
 
@@ -600,10 +632,6 @@ div.userpage {
 	transition: var(--speed);
 }
 
-.anonymous-user-content .login-link-box:hover {
-	color: var(--dark);
-}
-
 
 .anonymous-user-content .register-link-box {
 	display: flex;
@@ -613,10 +641,6 @@ div.userpage {
 	font-size: 2rem;
 	color: #FEFFFF;
 	transition: var(--speed);
-}
-
-.anonymous-user-content .register-link-box:hover {
-	color: var(--dark);
 }
 
 

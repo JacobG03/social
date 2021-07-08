@@ -24,6 +24,10 @@
                     </div>
                 </div>
             </div>
+            {% else %}
+            <div class='navbar-login-box'>
+                <a href='{{ url_for("login") }}'>Sign In</a>
+            </div>
             {% endif %}
         </div>
         <div class='searchbar-box'>
