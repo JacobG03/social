@@ -2,6 +2,9 @@
 {% block content %}
 <div class='container'>
     <div class='navbar'>
+        <div class='navbar-home-box'>
+            <a href='{{ url_for("index") }}'>We Up Here</a>
+        </div>
         {% if user.is_authenticated %}
         <div class='navbar-profile-box'>
             <div class='navbar-clickable-profile' id='navbar-clickable-profile'>
