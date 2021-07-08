@@ -463,7 +463,7 @@ div.userpage {
 .anonymous-user-content {
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 1fr 1fr;
+	grid-template-rows: 1fr;
 	width: 140px;
 	height: 140px;
 	transition: var(--speed);
