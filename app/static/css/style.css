@@ -174,9 +174,19 @@ body {
 
 .navbar-home-box a {
 	height: 75px;
+	width: 350px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	text-decoration: none;
 	font-size: 3.5rem;
 	color: var(--white);
+	border-radius: var(--border-radius);
+	transition: var(--speed);
+}
+
+.navbar-home-box a:hover {
+	background-color: var(--blue2);
 }
 
 
