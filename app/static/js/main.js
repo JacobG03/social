@@ -370,10 +370,7 @@ function getFilteredUsers(search_string) {
         clearUsers();
         renderUsers(filteredUsers, filteredUsers.length)
     } 
-    if (search_string.length != 0 && content.firstChild.id == 'view-more-users-box') {
-        // Delete load more button
-        let load_more = document.getElementById('view-more-users-box');
-        load_more.remove()
+    if (search_string.length != 0 && !content.firstChild) {
         
         // Change input color when nothing shows up
         searchbar.style.color = '#17252A';
