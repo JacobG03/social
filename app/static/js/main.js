@@ -205,39 +205,30 @@ function renderUsers (users, amount) {
                 element_a_4.appendChild(spotify_image);
             }
         }
-        let view_more_box = document.createElement('div');
-        view_more_box.id = 'view-more-users-box';
-        content.appendChild(view_more_box);
+        if (users.length != amount) {
+            let view_more_box = document.createElement('div');
+            view_more_box.id = 'view-more-users-box';
+            content.appendChild(view_more_box);
 
-        let view_more = document.createElement('div');
-        view_more.id = 'view-more';
-        view_more_box.appendChild(view_more);
+            let view_more = document.createElement('div');
+            view_more.id = 'view-more';
+            view_more_box.appendChild(view_more);
 
-        let span = document.createElement('span');
-        span.innerHTML = 'Load more'
-        view_more.appendChild(span);
-        view_more.classList.add('animate__animated', 'animate__fadeInUp');
+            let span = document.createElement('span');
+            span.innerHTML = 'Load more'
+            view_more.appendChild(span);
+            view_more.classList.add('animate__animated', 'animate__fadeInUp');
 
-        view_more.addEventListener('click', e => {
-            usersToDisplay += 50;
-            state.current = ''
-            state.displayed = false
-            clearUsers();
-            renderUsers(users_data, usersToDisplay);
-        })
+            view_more.addEventListener('click', e => {
+                usersToDisplay += 50;
+                state.current = ''
+                state.displayed = false
+                clearUsers();
+                renderUsers(users_data, usersToDisplay);
+            })
+        }
     }
 }
-
-
-// Functions for display and hiding the user page
-// Has to be window.onload or will return elements as null
-
-// TODO
-// Closes when users clicks another user
-// Closes when user clicks X
-//! Option on the user page to click next or last
-//!   and the last/next user page will be displayed
-//* Add transitions
 
 
 // Variable holding the current state of some 'user-page'
@@ -377,9 +368,13 @@ function getFilteredUsers(search_string) {
             });
         searchbar.style.color = '#2B7A78';
         clearUsers();
-        renderUsers(filteredUsers, usersToDisplay)
+        renderUsers(filteredUsers, filteredUsers.length)
     } 
-    if (search_string.length != 0 && !content.firstChild) {
+    if (search_string.length != 0 && content.firstChild.id == 'view-more-users-box') {
+        // Delete load more button
+        let load_more = document.getElementById('view-more-users-box');
+        load_more.remove()
+        
         // Change input color when nothing shows up
         searchbar.style.color = '#17252A';
 
