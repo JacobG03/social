@@ -11,6 +11,11 @@ def index():
     return render_template('index.html', user=current_user)
 
 
+@app.route('/settings', methods=['POST', 'GET'])
+def settings():
+    return render_template('settings.html', user=current_user, title='Settings')
+
+
 @app.get('/register')
 @app.post('/register')
 def register():
@@ -24,8 +29,9 @@ def register():
         user.online = True
         db.session.add(user)
         db.session.commit()
+        login_user(user, remember=False)
         return redirect(url_for('login'))
-    return render_template('register.html', form=form)
+    return render_template('register.html', form=form, title='Register')
 
 
 @app.get('/login')
@@ -42,7 +48,7 @@ def login():
 
         login_user(user, remember=form.remember_me.data)
         return redirect(url_for('index'))
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, title='Login')
 
 
 @app.get('/logout')

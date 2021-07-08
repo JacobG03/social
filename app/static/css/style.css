@@ -82,9 +82,11 @@ select {
 /* ------------------- */
 
 :root {
-    --dark: #17252A;
-    --blue: #3AAFA9;
+	--blue: #3AAFA9;
+	--blue2: #349d98;
+	--blue3: #2e8c87;
     --dark-blue: #2B7A78;
+    --dark: #17252A;
     --white: #FEFFFF;
     --darker-white: #DEF2F1;
     --border: 2px solid var(--dark-blue);
@@ -99,29 +101,38 @@ select {
 
 /* width */
 ::-webkit-scrollbar {
-width: 1rem;
+	width: 1rem;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-background: var(--darker-white);
-border-radius: 5px;
+	background: var(--darker-white);
+	border-radius: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-background: var(--dark-blue);
-border-radius: 5px;
+	background: var(--dark-blue);
+	border-radius: 5px;
+	transition: var(--speed);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-background: var(--dark-blue);
+	background: var(--blue3);
 }
 
 
 body {
-    background-color: var(--blue)
+	background-color: var(--blue);
+}
+
+.display-grid {
+	display: grid !important;
+}
+
+.display-block {
+	display: block !important;
 }
 
 .container {
@@ -129,11 +140,11 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: var(--blue);
-}
-
+	background: linear-gradient(180deg, rgba(45,65,73,0.2) 5%, rgba(58,175,169,1) 50%, rgba(45,65,73,0.5) 95%);}
+	
 
 .header {
-    height: 15vh;
+    height: 150px;
     width: 100vw;
     display: grid;
     grid-template-columns: 1fr;
@@ -144,10 +155,93 @@ body {
 .navbar {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
-	display: flex;
-	flex-direction: row;
+	display: grid;
+	grid-template-columns: repeat(10, 1fr);
+	grid-template-rows: 1fr;
     height: 100%;
     width: 100%;
+	background-color: var(--blue);
+}
+
+.navbar-profile-box {
+	grid-column: 10 / 11;
+	grid-row: 1 / 2;
+	width: 170px;
+	height: 75px;
+}
+
+
+.navbar-clickable-profile {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	border-radius: var(--border-radius);
+	transition: var(--speed);
+}
+
+.navbar-clickable-profile:hover {
+	cursor: pointer;
+	background-color: var(--blue2);
+}
+
+.navbar-clickable-profile span {
+	font-size: 1.5rem;
+	color: var(--darker-white);
+}
+
+.navbar-clickable-profile img {
+	width: 64px;
+	height: 64px;
+	border: var(--border);
+	border-radius: var(--border-radius);
+	margin-left: 5px;
+}
+
+
+.navbar-profile-items {
+	z-index: 10;
+	position: fixed;
+	display: none;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto;
+	width: 170px;
+	height: auto;
+	border-bottom-left-radius: var(--border-radius);
+	border-bottom-right-radius: var(--border-radius);
+	background-color: var(--blue);
+	border: 2px solid var(--dark-blue);
+	border-top: none;
+	margin-top: 0px;
+	right: 22px;
+	overflow: hidden;
+}
+
+
+.navbar-profile-item {
+	width: 100%;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	color: var(--darker-white);
+	transition: var(--speed);
+}
+
+.navbar-profile-item:hover {
+	background-color: var(--blue2);
+}
+
+.navbar-profile-item a{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--darker-white);
 }
 
 
@@ -157,7 +251,6 @@ body {
     justify-content: center;
     width: 100%;
     height: 100%;
-	margin-top: 30px;
 }
 
 
@@ -188,7 +281,7 @@ body {
 }
 
 .searchbar-button:hover {
-    filter: brightness(120%);
+    background-color: var(--blue3);
     cursor: pointer;
 }
 
@@ -200,8 +293,8 @@ body {
 	margin: auto;
     width: 1000px;
     height: 700px;
-	margin-top: 50px;
 	border-radius: var(--border-radius);
+	margin-top: 20px;
 }
 
 
@@ -249,10 +342,11 @@ body {
 	width: 36px;
 	height: 36px;
 	border-radius: 50%;
-	border: 3px solid #3AAFA9;
-	background-color: #78f1eb;
+	border: 3px solid var(--dark-blue);
+	background-color: var(--blue);
 	margin: 107px;
 	transition: var(--speed);
+	filter: brightness(120%);
 }
 
 .user_profile_box {
@@ -299,10 +393,6 @@ div.userpage {
 	color: #FEFFFF;
 }
 
-
-.display-block {
-	display: block !important;
-}
 
 
 /* Userpage content */
@@ -516,6 +606,7 @@ div.userpage {
 	border: var(--border);
 	border-radius: var(--border-radius);
 	color: #FEFFFF;
+	background-color: var(--blue);
 }
 
 .form-header-box {

@@ -12,7 +12,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
     <link rel='stylesheet' href='{{ url_for("static", filename="css/style.css") }}'>
     <script src='{{ url_for("static", filename="js/main.js") }}'></script>
-    <title>Social</title>
+    {% if title %}
+    <title>We Up Here - {{ title }}</title>
+    {% else %}
+    <title>We Up Here</title>
+    {% endif %}
 </head>
 <body>
     {% block content %}

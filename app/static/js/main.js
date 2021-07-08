@@ -385,4 +385,12 @@ window.onload = function() {
         const searchString = e.target.value;
         getFilteredUsers(searchString);
     });
+
+    navbar_clickable_profile = document.getElementById('navbar-clickable-profile');
+    if (navbar_clickable_profile) {
+        navbar_clickable_profile.addEventListener('click', () => {
+            navbar_profile_items = document.getElementById('navbar-profile-items');
+            navbar_profile_items.classList.toggle('display-grid');
+        }); 
+    }
 }

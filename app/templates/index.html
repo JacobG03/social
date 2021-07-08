@@ -3,8 +3,22 @@
 <div class='container'>
     <div class='header'>
         <div class='navbar'>
-            <div class='navbar-header'>
+            {% if user.is_authenticated %}
+            <div class='navbar-profile-box'>
+                <div class='navbar-clickable-profile' id='navbar-clickable-profile'>
+                    <span>{{ user.username }}</span>
+                    <img src='{{ user.profile_image }}'>
+                </div>
+                <div class='navbar-profile-items' id='navbar-profile-items'>
+                    <div class='navbar-profile-item'>
+                        <a href='{{ url_for("settings") }}'>Settings</a>
+                    </div>
+                    <div class='navbar-profile-item'>
+                        <a href='{{ url_for("logout") }}'>Logout</a>
+                    </div>
+                </div>
             </div>
+            {% endif %}
         </div>
         <div class='searchbar-box'>
             <input type='text' class='searchbar' id='searchbar'>
@@ -14,12 +28,12 @@
     <div class='content-box'>
         <div class='content' id='content'>
             {% if user.is_anonymous %}
-            <div class='anonymous-user animate__animated animate__fadeInUp  '>
+            <div class='anonymous-user animate__animated animate__fadeInUp'>
                 <div class='anonymous-user-content'>
                     <a class='login-link-box' href='{{ url_for("login") }}'>Sign In</a>
                 </div>
             </div>
-            <div class='anonymous-user animate__animated animate__fadeInUp  '>
+            <div class='anonymous-user animate__animated animate__fadeInUp'>
                 <div class='anonymous-user-content'>
                     <a class='register-link-box' href='{{ url_for("register") }}'>Register</a>
                 </div>
