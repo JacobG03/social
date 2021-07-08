@@ -8,7 +8,7 @@ const getDefaultData = async () => {
         for (let i = 0; i < data.length; i++) {
             users_data.push(data[i]);
         }
-        renderUsers(data);
+        renderUsers(data, 50);
     } catch (error) {
         console.log(error)
     }
@@ -20,185 +20,211 @@ const retrieveDefaultData = async () => {
 
 retrieveDefaultData();
 
+var usersToDisplay = 50;
+
 // Display users
-function renderUsers (users) {
+function renderUsers (users, amount) {
     // parent div
     let content = document.getElementById('content');
-    for (let i = 0; i < users.length; i++) {
-        // Create container div
-        let user = document.createElement('div');
-        user.className = 'user';
-        user.id = 'user-' + users[i].id;
-        content.appendChild(user)
-
-        // Create container div
-        let user_profile_box = document.createElement('div');
-        user_profile_box.className = 'user_profile_box';
-        user_profile_box.id = 'user_profile_box-' + users[i].id;
-        user_profile_box.classList.add('animate__animated', 'animate__fadeInUp');
-        user_profile_box.addEventListener('click', displayUserPage.bind(event, users[i].id), false)
-        user.appendChild(user_profile_box);
-
-        // If user is online create div (circle blue color)
-        if (users[i].online){
-            let online_icon = document.createElement('div');
-            online_icon.className = 'online-icon';
-            user_profile_box.appendChild(online_icon);
+    if (content) {
+        for (let i = 0; i < amount; i++) {
+            // Create container div
+            if (users[i]) {
+                let user = document.createElement('div');
+                user.className = 'user';
+                user.id = 'user-' + users[i].id;
+                content.appendChild(user)
+    
+                // Create container div
+                let user_profile_box = document.createElement('div');
+                user_profile_box.className = 'user_profile_box';
+                user_profile_box.id = 'user_profile_box-' + users[i].id;
+                user_profile_box.classList.add('animate__animated', 'animate__fadeInUp');
+                user_profile_box.addEventListener('click', displayUserPage.bind(event, users[i].id), false)
+                user.appendChild(user_profile_box);
+    
+                // If user is online create div (circle blue color)
+                if (users[i].online){
+                    let online_icon = document.createElement('div');
+                    online_icon.className = 'online-icon';
+                    user_profile_box.appendChild(online_icon);
+                }
+                // Create profile img from link
+                let user_img = document.createElement('img');
+                user_img.src = users[i].profile_image; 
+                user_img.id = 'user-img-' + users[i].id;
+                user_profile_box.appendChild(user_img)
+    
+                // Userpage div container
+                let userpage = document.createElement('div');
+                userpage.className = 'userpage';
+                userpage.id = 'userpage-' + users[i].id;
+                userpage.classList.add('animate__animated', 'animate__backInUp');
+                user.appendChild(userpage);
+    
+                // Userpage content container
+                let userpage_content = document.createElement('div');
+                userpage_content.className = 'userpage-content';
+                userpage.appendChild(userpage_content);
+    
+                // Main top level content
+                let main_content = document.createElement('div');
+                main_content.className = 'main-content';
+                userpage_content.appendChild(main_content);
+    
+                // arrow box
+                let arrow_box_left = document.createElement('div');
+                arrow_box_left.className = 'arrow-box';
+                arrow_box_left.id = 'arrow-box-left';
+                main_content.appendChild(arrow_box_left);
+                
+                let arrow_img = document.createElement('img');
+                arrow_img.className = 'left-arrow-img';
+                arrow_img.src = window.location.href + 'static/img/button-icons/left-arrow.png';
+                arrow_img.addEventListener('click', lastUserpage, false)
+                arrow_box_left.appendChild(arrow_img);
+    
+                // Middle content
+                let middle_content = document.createElement('div');
+                middle_content.className = 'middle-content';
+                main_content.appendChild(middle_content);
+    
+                // Profile pic box
+                let profile_pic_box = document.createElement('div');
+                profile_pic_box.className = 'profile_pic_box';
+                middle_content.appendChild(profile_pic_box);
+                let user_profile_box_userpage = document.createElement('div');
+                user_profile_box_userpage.className = 'user_profile_box-userpage';
+                profile_pic_box.appendChild(user_profile_box_userpage);
+                let userpage_image = document.createElement('img');
+                userpage_image.src = users[i].profile_image;
+                user_profile_box_userpage.appendChild(userpage_image);
+    
+                // Basic user info
+                let user_basic_info = document.createElement('div');
+                user_basic_info.className = 'user_basic_info';
+                middle_content.appendChild(user_basic_info);
+    
+                let username_box = document.createElement('div');
+                username_box.className = 'username-box';
+                user_basic_info.appendChild(username_box);
+    
+                let username_span = document.createElement('span');
+                username_span.innerHTML = users[i].username;
+                username_span.className = 'username';
+                username_box.appendChild(username_span);
+    
+                let location_box = document.createElement('div');
+                location_box.className = 'location-box';
+                user_basic_info.appendChild(location_box); 
+    
+                let location_image = document.createElement('img');
+                location_image.src = window.location.href + 'static/img/button-icons/location.png';
+                location_box.appendChild(location_image);
+    
+                let location_span = document.createElement('span');
+                location_span.innerHTML = users[i].location;
+                location_box.appendChild(location_span);
+    
+                let age_box = document.createElement('div');
+                age_box.className = 'username-age';
+                user_basic_info.appendChild(age_box);
+    
+                let age_image = document.createElement('img');
+                age_image.src = window.location.href + 'static/img/button-icons/user.png';
+                age_box.appendChild(age_image);
+    
+                let user_age = document.createElement('span');
+                user_age.innerHTML = users[i].age;
+                age_box.appendChild(user_age);
+    
+                // Right side content
+                let right_side_content = document.createElement('div');
+                right_side_content.className = 'right-side-content';
+                main_content.appendChild(right_side_content);
+    
+                let close_box = document.createElement('div');
+                close_box.className = 'close-box';
+                close_box.addEventListener('click', hideUserPageOnX, false)
+                right_side_content.appendChild(close_box);
+    
+                let close_image = document.createElement('img');
+                close_image.src = window.location.href + 'static/img/button-icons/close.png';
+                close_box.appendChild(close_image);
+    
+                let arrow_box = document.createElement('div');
+                arrow_box.className = 'arrow-box';
+                arrow_box.id = 'arrow-box-right';
+                right_side_content.appendChild(arrow_box);
+    
+                let arrow_image = document.createElement('img');
+                arrow_image.className = 'right-arrow-img';
+                arrow_image.src = window.location.href + 'static/img/button-icons/right-arrow.png';
+                arrow_image.addEventListener('click', nextUserpage, false);
+                arrow_box.appendChild(arrow_image);
+    
+                // Social media container
+                let social_media_content = document.createElement('div');
+                social_media_content.className = 'social-media-content';
+                userpage_content.appendChild(social_media_content);
+    
+                let element_a = document.createElement('a');
+                element_a.href = users[i].facebook;
+                element_a.target = '_blank';
+                social_media_content.appendChild(element_a);
+    
+                let facebook_image = document.createElement('img');
+                facebook_image.src = window.location.href + 'static/img/social-media-icons/facebook-img.png';
+                element_a.appendChild(facebook_image);
+    
+                let element_a_2 = document.createElement('a');
+                element_a_2.href = users[i].twitter;
+                element_a_2.target = '_blank';
+                social_media_content.appendChild(element_a_2);
+    
+                let twitter_image = document.createElement('img');
+                twitter_image.src = window.location.href + 'static/img/social-media-icons/twitter-img.png';
+                element_a_2.appendChild(twitter_image);
+    
+                let element_a_3 = document.createElement('a');
+                element_a_3.href = users[i].youtube;
+                element_a_3.target = '_blank';
+                social_media_content.appendChild(element_a_3);
+    
+                let youtube_image = document.createElement('img');
+                youtube_image.src = window.location.href + 'static/img/social-media-icons/youtube-img.png';
+                element_a_3.appendChild(youtube_image);
+    
+                let element_a_4 = document.createElement('a');
+                element_a_4.href = users[i].spotify;
+                element_a_4.target = '_blank';
+                social_media_content.appendChild(element_a_4);
+    
+                let spotify_image = document.createElement('img');
+                spotify_image.src = window.location.href + 'static/img/social-media-icons/spotify-img.png';
+                element_a_4.appendChild(spotify_image);
+            }
         }
-        // Create profile img from link
-        let user_img = document.createElement('img');
-        user_img.src = users[i].profile_image; 
-        user_img.id = 'user-img-' + users[i].id;
-        user_profile_box.appendChild(user_img)
+        let view_more_box = document.createElement('div');
+        view_more_box.id = 'view-more-users-box';
+        content.appendChild(view_more_box);
 
-        // Userpage div container
-        let userpage = document.createElement('div');
-        userpage.className = 'userpage';
-        userpage.id = 'userpage-' + users[i].id;
-        userpage.classList.add('animate__animated', 'animate__backInUp');
-        user.appendChild(userpage);
+        let view_more = document.createElement('div');
+        view_more.id = 'view-more';
+        view_more_box.appendChild(view_more);
 
-        // Userpage content container
-        let userpage_content = document.createElement('div');
-        userpage_content.className = 'userpage-content';
-        userpage.appendChild(userpage_content);
+        let span = document.createElement('span');
+        span.innerHTML = 'Load more'
+        view_more.appendChild(span);
+        view_more.classList.add('animate__animated', 'animate__fadeInUp');
 
-        // Main top level content
-        let main_content = document.createElement('div');
-        main_content.className = 'main-content';
-        userpage_content.appendChild(main_content);
-
-        // arrow box
-        let arrow_box_left = document.createElement('div');
-        arrow_box_left.className = 'arrow-box';
-        arrow_box_left.id = 'arrow-box-left';
-        main_content.appendChild(arrow_box_left);
-        
-        let arrow_img = document.createElement('img');
-        arrow_img.className = 'left-arrow-img';
-        arrow_img.src = window.location.href + 'static/img/button-icons/left-arrow.png';
-        arrow_img.addEventListener('click', lastUserpage, false)
-        arrow_box_left.appendChild(arrow_img);
-
-        // Middle content
-        let middle_content = document.createElement('div');
-        middle_content.className = 'middle-content';
-        main_content.appendChild(middle_content);
-
-        // Profile pic box
-        let profile_pic_box = document.createElement('div');
-        profile_pic_box.className = 'profile_pic_box';
-        middle_content.appendChild(profile_pic_box);
-        let user_profile_box_userpage = document.createElement('div');
-        user_profile_box_userpage.className = 'user_profile_box-userpage';
-        profile_pic_box.appendChild(user_profile_box_userpage);
-        let userpage_image = document.createElement('img');
-        userpage_image.src = users[i].profile_image;
-        user_profile_box_userpage.appendChild(userpage_image);
-
-        // Basic user info
-        let user_basic_info = document.createElement('div');
-        user_basic_info.className = 'user_basic_info';
-        middle_content.appendChild(user_basic_info);
-
-        let username_box = document.createElement('div');
-        username_box.className = 'username-box';
-        user_basic_info.appendChild(username_box);
-
-        let username_span = document.createElement('span');
-        username_span.innerHTML = users[i].username;
-        username_span.className = 'username';
-        username_box.appendChild(username_span);
-
-        let location_box = document.createElement('div');
-        location_box.className = 'location-box';
-        user_basic_info.appendChild(location_box); 
-
-        let location_image = document.createElement('img');
-        location_image.src = window.location.href + 'static/img/button-icons/location.png';
-        location_box.appendChild(location_image);
-
-        let location_span = document.createElement('span');
-        location_span.innerHTML = users[i].location;
-        location_box.appendChild(location_span);
-
-        let age_box = document.createElement('div');
-        age_box.className = 'username-age';
-        user_basic_info.appendChild(age_box);
-
-        let age_image = document.createElement('img');
-        age_image.src = window.location.href + 'static/img/button-icons/user.png';
-        age_box.appendChild(age_image);
-
-        let user_age = document.createElement('span');
-        user_age.innerHTML = users[i].age;
-        age_box.appendChild(user_age);
-
-        // Right side content
-        let right_side_content = document.createElement('div');
-        right_side_content.className = 'right-side-content';
-        main_content.appendChild(right_side_content);
-
-        let close_box = document.createElement('div');
-        close_box.className = 'close-box';
-        close_box.addEventListener('click', hideUserPageOnX, false)
-        right_side_content.appendChild(close_box);
-
-        let close_image = document.createElement('img');
-        close_image.src = window.location.href + 'static/img/button-icons/close.png';
-        close_box.appendChild(close_image);
-
-        let arrow_box = document.createElement('div');
-        arrow_box.className = 'arrow-box';
-        arrow_box.id = 'arrow-box-right';
-        right_side_content.appendChild(arrow_box);
-
-        let arrow_image = document.createElement('img');
-        arrow_image.className = 'right-arrow-img';
-        arrow_image.src = window.location.href + 'static/img/button-icons/right-arrow.png';
-        arrow_image.addEventListener('click', nextUserpage, false);
-        arrow_box.appendChild(arrow_image);
-
-        // Social media container
-        let social_media_content = document.createElement('div');
-        social_media_content.className = 'social-media-content';
-        userpage_content.appendChild(social_media_content);
-
-        let element_a = document.createElement('a');
-        element_a.href = users[i].facebook;
-        element_a.target = '_blank';
-        social_media_content.appendChild(element_a);
-
-        let facebook_image = document.createElement('img');
-        facebook_image.src = window.location.href + 'static/img/social-media-icons/facebook-img.png';
-        element_a.appendChild(facebook_image);
-
-        let element_a_2 = document.createElement('a');
-        element_a_2.href = users[i].twitter;
-        element_a_2.target = '_blank';
-        social_media_content.appendChild(element_a_2);
-
-        let twitter_image = document.createElement('img');
-        twitter_image.src = window.location.href + 'static/img/social-media-icons/twitter-img.png';
-        element_a_2.appendChild(twitter_image);
-
-        let element_a_3 = document.createElement('a');
-        element_a_3.href = users[i].youtube;
-        element_a_3.target = '_blank';
-        social_media_content.appendChild(element_a_3);
-
-        let youtube_image = document.createElement('img');
-        youtube_image.src = window.location.href + 'static/img/social-media-icons/youtube-img.png';
-        element_a_3.appendChild(youtube_image);
-
-        let element_a_4 = document.createElement('a');
-        element_a_4.href = users[i].spotify;
-        element_a_4.target = '_blank';
-        social_media_content.appendChild(element_a_4);
-
-        let spotify_image = document.createElement('img');
-        spotify_image.src = window.location.href + 'static/img/social-media-icons/spotify-img.png';
-        element_a_4.appendChild(spotify_image);
+        view_more.addEventListener('click', e => {
+            usersToDisplay += 50;
+            state.current = ''
+            state.displayed = false
+            clearUsers();
+            renderUsers(users_data, usersToDisplay);
+        })
     }
 }
 
@@ -219,6 +245,7 @@ var state = {
     'displayed': false,
     'current' : ''    // 'user-5', 'user-76'
 }
+
 
 var displayUserPage = function (user_id) {
     let userpage = 'userpage-' + user_id;
@@ -332,13 +359,13 @@ function getFilteredUsers(search_string) {
     state.displayed = false;
     if (search_string.length == 0 && !content.firstChild) {
         searchbar.style.color = '#2B7A78';
-        renderUsers(users_data);
+        renderUsers(users_data, usersToDisplay);
     } else if (search_string.length == 0 && content.children[0].id == 'no-result-box') {
         clearUsers();
-        renderUsers(users_data);
+        renderUsers(users_data, usersToDisplay);
     } else if (search_string.length == 0) {
         clearUsers();
-        renderUsers(users_data);
+        renderUsers(users_data, usersToDisplay);
     }
     else if (search_string.length != 0) {
         const filteredUsers = users_data.filter(user => {
@@ -350,7 +377,7 @@ function getFilteredUsers(search_string) {
             });
         searchbar.style.color = '#2B7A78';
         clearUsers();
-        renderUsers(filteredUsers)
+        renderUsers(filteredUsers, usersToDisplay)
     } 
     if (search_string.length != 0 && !content.firstChild) {
         // Change input color when nothing shows up
