@@ -5,6 +5,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 
 #! User names cannot contain '-', its used in js for cutting out id
+# TODO - Add a timestamp when the user registered
+#*  Think of more user variables
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)

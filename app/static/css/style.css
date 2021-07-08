@@ -759,7 +759,7 @@ div.userpage {
 
 .form-redirect-box a {
 	font-size: 1.2rem;
-	color: var(--dark);
+	color: var(--white);
 }
 
 .form-redirect-box a:hover {
