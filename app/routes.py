@@ -11,6 +11,11 @@ def index():
     return render_template('index.html', user=current_user)
 
 
+@app.route('/profile', methods=['POST', 'GET'])
+def profile():
+    return render_template('profile.html', user=current_user, title='Profile')
+
+
 @app.route('/settings', methods=['POST', 'GET'])
 def settings():
     return render_template('settings.html', user=current_user, title='Settings')
