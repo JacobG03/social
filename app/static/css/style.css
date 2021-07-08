@@ -317,8 +317,10 @@ body {
     border: none;
     font-size: 2rem;
     background-color: var(--darker-white);
-    color: var(--dark-blue)
+    color: var(--dark-blue);
+	transition: var(--speed);
 }
+
 
 
 .searchbar-button {
