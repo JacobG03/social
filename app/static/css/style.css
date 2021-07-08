@@ -153,13 +153,11 @@ body {
 
 
 .navbar {
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
 	display: grid;
 	grid-template-columns: repeat(10, 1fr);
 	grid-template-rows: 1fr;
-    height: 100%;
-    width: 100%;
+    height: 75px;
+    width: 100vw;
 	background-color: var(--blue);
 }
 

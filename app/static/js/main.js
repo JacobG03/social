@@ -381,10 +381,12 @@ window.onload = function() {
     // Listen for search input
     const searchbar = document.getElementById('searchbar');
     
-    searchbar.addEventListener('keyup', e => {
-        const searchString = e.target.value;
-        getFilteredUsers(searchString);
-    });
+    if (searchbar) {
+        searchbar.addEventListener('keyup', e => {
+            const searchString = e.target.value;
+            getFilteredUsers(searchString);
+        });
+    }
 
     navbar_clickable_profile = document.getElementById('navbar-clickable-profile');
     if (navbar_clickable_profile) {
