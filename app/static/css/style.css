@@ -82,14 +82,14 @@ select {
 /* ------------------- */
 
 :root {
-	--blue: #3AAFA9;
-	--blue2: #349d98;
-	--blue3: #2e8c87;
-    --dark-blue: #2B7A78;
-    --dark: #17252A;
-    --white: #FEFFFF;
-    --darker-white: #DEF2F1;
-    --border: 2px solid var(--dark-blue);
+	--main: #3AAFA9;
+	--main2: #349d98;
+	--main3: #2e8c87;
+    --secondary2: #2B7A78;
+    --secondary: #17252A;
+    --third: #FEFFFF;
+    --secondary3: #DEF2F1;
+    --border: 2px solid var(--secondary2);
     --border-radius: 8px;
     --speed: 500ms;
     font-size: 16px;
@@ -106,25 +106,25 @@ select {
 
 /* Track */
 ::-webkit-scrollbar-track {
-	background: var(--darker-white);
+	background: var(--secondary3);
 	border-radius: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: var(--dark-blue);
+	background: var(--secondary2);
 	border-radius: 5px;
 	transition: var(--speed);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: var(--blue3);
+	background: var(--main3);
 }
 
 
 body {
-	background-color: var(--blue);
+	background-color: var(--main);
 }
 
 .display-grid {
@@ -139,9 +139,8 @@ body {
 	position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: var(--blue);
-	background: linear-gradient(180deg, rgba(45,65,73,0.2) 5%, rgba(58,175,169,1) 50%, rgba(45,65,73,0.5) 95%);}
-	
+    background-color: var(--main2);
+}	
 
 .header {
     height: 150px;
@@ -158,7 +157,7 @@ body {
 	grid-template-rows: 1fr;
     height: 75px;
     width: 100vw;
-	background-color: var(--blue);
+	background-color: var(--main);
 }
 
 
@@ -180,13 +179,13 @@ body {
 	align-items: center;
 	text-decoration: none;
 	font-size: 3.5rem;
-	color: var(--white);
+	color: var(--third);
 	border-radius: var(--border-radius);
 	transition: var(--speed);
 }
 
 .navbar-home-box a:hover {
-	background-color: var(--blue2);
+	background-color: var(--main2);
 }
 
 
@@ -211,12 +210,12 @@ body {
 
 .navbar-clickable-profile:hover {
 	cursor: pointer;
-	background-color: var(--blue2);
+	background-color: var(--main2);
 }
 
 .navbar-clickable-profile span {
 	font-size: 1.5rem;
-	color: var(--darker-white);
+	color: var(--secondary3);
 }
 
 .navbar-clickable-profile img {
@@ -238,8 +237,8 @@ body {
 	height: auto;
 	border-bottom-left-radius: var(--border-radius);
 	border-bottom-right-radius: var(--border-radius);
-	background-color: var(--blue);
-	border: 2px solid var(--dark-blue);
+	background-color: var(--main);
+	border: 2px solid var(--secondary2);
 	border-top: none;
 	margin-top: 0px;
 	right: 22px;
@@ -254,13 +253,13 @@ body {
 	justify-content: center;
 	align-items: center;
 	flex-direction: row;
-	color: var(--darker-white);
+	color: var(--secondary3);
 	transition: var(--speed);
 	font-size: 1.3rem;
 }
 
 .navbar-profile-item:hover {
-	background-color: var(--blue2);
+	background-color: var(--main2);
 }
 
 .navbar-profile-item a{
@@ -269,7 +268,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: var(--darker-white);
+	color: var(--secondary3);
 }
 
 
@@ -291,12 +290,12 @@ body {
 	align-items: center;
 	border-radius: var(--border-radius);
 	transition: var(--speed);
-	color: var(--darker-white);
+	color: var(--secondary3);
 	font-size: 2rem;
 }
 
 .navbar-login-box a:hover {
-	background-color: var(--blue2);
+	background-color: var(--main2);
 }
 
 
@@ -316,8 +315,8 @@ body {
     outline: none;
     border: none;
     font-size: 2rem;
-    background-color: var(--darker-white);
-    color: var(--dark-blue);
+    background-color: var(--secondary3);
+    color: var(--secondary2);
 	transition: var(--speed);
 }
 
@@ -330,15 +329,15 @@ body {
     border-radius: var(--border-radius);
 	border: var(--border);
     outline: none;
-    background-color: var(--dark-blue);
-    color: var(--darker-white);
+    background-color: var(--secondary2);
+    color: var(--secondary3);
     margin-left: 5px;
     transition: var(--speed);
     font-size: 1.5rem;
 }
 
 .searchbar-button:hover {
-    background-color: var(--blue);
+    background-color: var(--main);
     cursor: pointer;
 }
 
@@ -399,8 +398,8 @@ body {
 	width: 36px;
 	height: 36px;
 	border-radius: 50%;
-	border: 3px solid var(--dark-blue);
-	background-color: var(--blue);
+	border: 3px solid var(--secondary2);
+	background-color: var(--main);
 	margin: 107px;
 	transition: var(--speed);
 	filter: brightness(120%);
@@ -615,12 +614,12 @@ div.userpage {
 	height: 140px;
 	border: var(--border);
 	border-radius: var(--border-radius);
-	background-color: var(--dark-blue);
+	background-color: var(--secondary2);
 	transition: var(--speed);
 }
 
 .anonymous-user-content:hover {
-	background-color: var(--blue);
+	background-color: var(--main);
 }
 
 
@@ -660,7 +659,7 @@ div.userpage {
 	border: var(--border);
 	border-radius: var(--border-radius);
 	color: #FEFFFF;
-	background-color: var(--blue);
+	background-color: var(--main);
 }
 
 .form-header-box {
@@ -705,7 +704,7 @@ div.userpage {
 
 .form-input-box span {
 	position: absolute;
-	color: var(--dark);
+	color: var(--secondary);
 	font-size: 1.5rem;
 	display: flex;
 	align-self: center;
@@ -759,11 +758,11 @@ div.userpage {
 
 .form-redirect-box a {
 	font-size: 1.2rem;
-	color: var(--white);
+	color: var(--third);
 }
 
 .form-redirect-box a:hover {
-	color: var(--white);
+	color: var(--third);
 }
 
 
@@ -776,24 +775,25 @@ div.userpage {
 	height: 100px;
 }
 
+
 #view-more {
 	width: 400px;
-	height: 80px;
+	height: 50px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border-radius: var(--border-radius);
 	border: var(--border);
-	background-color: var(--dark-blue);
+	background-color: var(--secondary2);
 	transition: var(--speed);
 }
 
 #view-more:hover {
 	cursor: pointer;
-	background-color: var(--blue);
+	background-color: var(--main);
 }
 
 #view-more span {
-	color: var(--darker-white);
+	color: var(--secondary3);
 	font-size: 2rem;
 }

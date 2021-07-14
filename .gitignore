@@ -1,2 +1,3 @@
 app/scrape.py
 __pycache__/
+venv/

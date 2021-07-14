@@ -1,9 +1,27 @@
 from flask_login.utils import logout_user
-from app import app, db
-from flask import render_template, request, jsonify, redirect, url_for, flash
+from app import app, db, s, mail
+from flask import render_template, request, jsonify, redirect, url_for
 from flask_login import current_user, login_user, logout_user
 from app.models import User
 from app.forms import RegistrationForm, LoginForm
+from flask_mail import Message
+from itsdangerous import SignatureExpired
+
+
+#TODO
+#* Chat with socketio. Private and groups chats.
+#* Group chats will have limits so people can't spam.
+#* Clean chat with icons and stuff
+
+
+#TODO 
+#* Second page 'Posts'
+#* By default most recent with socketio displaying it live when user posts
+#* It will work so that for lets say search Bielsko
+#* User will  have the ability to like sth (only author
+#* sees likes amount) and the ability to 'love'/'favourite' sth (also
+#* only author sees) but at 20:00 every day top 1% of fav things will
+#* be saved and have its own link as weuphere.com/posts/bielsko/<id>
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -21,6 +39,8 @@ def settings():
     return render_template('settings.html', user=current_user, title='Settings')
 
 
+
+
 @app.get('/register')
 @app.post('/register')
 def register():
@@ -34,9 +54,37 @@ def register():
         user.online = True
         db.session.add(user)
         db.session.commit()
+
+        #Wrap this code in a function
+        email = form.email.data
+        token = s.dumps(email, salt='email-confirm')
+
+        msg = Message('Confirm Email', sender='jaqobek1995@gmail.com', recipients=[email])
+
+        link = url_for('confirm_email', token=token, _external=True)
+
+        msg.body = 'Your link is {}'.format(link)
+
+        mail.send(msg)
+
         login_user(user, remember=False)
-        return redirect(url_for('login'))
+
+        return redirect(url_for('confirmation_link'))
     return render_template('register.html', form=form, title='Register')
+
+
+@app.route('/confirm_email/<token>')
+def confirm_email(token):
+    try:
+        email = s.loads(token, salt='email-confirm', max_age=1800)
+    except SignatureExpired:
+        return '<h1>The token is expired!</h1>'
+    return '<h1>The token works!</h1>'
+
+
+@app.get('/confirmation_link')
+def confirmation_link():
+    return render_template('confirmation_link.html', title='Confirm link')
 
 
 @app.get('/login')
