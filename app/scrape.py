@@ -1,10 +1,17 @@
 import random
+from app import db
+from app.models import User
+
 
 def generateOnline():
     seed = random.randint(0, 1)
     if seed == 0:
         return False
     return True
+
+
+def generateAge():
+    return random.randint(16, 55)
 
 
 def generateParamaters():
@@ -215,7 +222,7 @@ user = {'names':
                 'Ruth',
                 'Jerry',
                 'Maria'],
-        'age': random.randint(16, 55),
+        'age': generateAge(),
         'online': generateOnline(),
         'location': [
                 'New York, New York ',

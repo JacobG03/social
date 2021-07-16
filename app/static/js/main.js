@@ -1,4 +1,37 @@
 // Get default user data
+
+//TODO 
+// Make sure all colors are used via variable names
+
+// Colors
+var bg_color = getComputedStyle(document.documentElement)
+.getPropertyValue('--bg-color');
+
+var bg_color_lighter = getComputedStyle(document.documentElement)
+.getPropertyValue('--bg-color-lighter');
+
+var main_color = getComputedStyle(document.documentElement)
+.getPropertyValue('--main-color');
+
+var caret_color = getComputedStyle(document.documentElement)
+.getPropertyValue('--caret-color');
+
+var sub_color = getComputedStyle(document.documentElement)
+.getPropertyValue('--sub-color');
+
+var text_color_important = getComputedStyle(document.documentElement)
+.getPropertyValue('--text-color-important');
+
+var text_color = getComputedStyle(document.documentElement)
+.getPropertyValue('--text-color');
+
+var error_color = getComputedStyle(document.documentElement)
+.getPropertyValue('--error-color');
+
+var error_extra_color = getComputedStyle(document.documentElement)
+.getPropertyValue('--error-extra-color');
+
+
 var users_data = []
 const getDefaultData = async () => {
     try {
@@ -255,7 +288,7 @@ var displayUserPage = function (user_id) {
     let userpage_element = document.getElementById(userpage);
 
     let user_img = document.getElementById('user-img-' + user_id);
-    user_img.style.borderRadius = '50px';
+    user_img.style.borderRadius = '40px';
     
     // close window if user clicks on him self again
     if (state.current == userpage && state.displayed == true) {
@@ -267,9 +300,11 @@ var displayUserPage = function (user_id) {
         userpage_element.classList.toggle('display-block');
         state.displayed = true;
         state.current = userpage;
-        // is user click on another user when window opened 
+        // if user clicks on another user when window opened 
         // close and open new
     } else if (state.current != '' && state.displayed == true) {
+        let current_user_img = document.getElementById('user-img-' + state.current.split('-')[1]);
+        current_user_img.style.borderRadius = '8px';
         page_to_close = document.getElementById(state.current);
         page_to_close.classList.toggle('display-block');
         userpage_element.classList.toggle('display-block');
@@ -300,7 +335,7 @@ var lastUserpage = function () {
                 state.current = userpages[i - 1].id;
 
                 let new_user_img = document.getElementById('user-img-' + state.current.split('-')[1]);
-                new_user_img.style.borderRadius = '50px';
+                new_user_img.style.borderRadius = '40px';
                 new_user_img.scrollIntoView({block: "center"});
                 break;
             }
@@ -326,7 +361,7 @@ var nextUserpage = function () {
                 state.current = userpages[i + 1].id;
 
                 let new_user_img = document.getElementById('user-img-' + state.current.split('-')[1]);
-                new_user_img.style.borderRadius = '50px';
+                new_user_img.style.borderRadius = '40px';
                 new_user_img.scrollIntoView({block: "center"});
                 break;
             }
@@ -361,7 +396,7 @@ function getFilteredUsers(search_string) {
     state.current = '';
     state.displayed = false;
     if (search_string.length == 0 && !content.firstChild) {
-        searchbar.style.color = '#2B7A78';
+        searchbar.style.color = '#212135';
         renderUsers(users_data, usersToDisplay);
     } else if (search_string.length == 0 && content.children[0].id == 'no-result-box') {
         clearUsers();
@@ -378,14 +413,14 @@ function getFilteredUsers(search_string) {
                 user.location.toLowerCase().includes(search_string.toLowerCase())
                 );
             });
-        searchbar.style.color = '#2B7A78';
+        searchbar.style.color = '#212135';
         clearUsers();
         renderUsers(filteredUsers, filteredUsers.length)
     } 
     if (search_string.length != 0 && !content.firstChild) {
         
         // Change input color when nothing shows up
-        searchbar.style.color = '#17252A';
+        searchbar.style.color = error_color;
 
         no_result_box = document.createElement('div');
         no_result_box.id = 'no-result-box';

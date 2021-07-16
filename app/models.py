@@ -3,11 +3,9 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-
 #! User names cannot contain '-', its used in js for cutting out id
 # TODO - Add a timestamp when the user registered
 #*  Think of more user variables
-#* - email_confirmed = boolean
 #* - account_date = day month year in seconds
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -32,13 +30,14 @@ class User(UserMixin, db.Model):
     hobbies = db.Column(db.Text, nullable=False, default="")
 
     profile_image = db.Column(db.String(256), nullable=False, default="https://avatarfiles.alphacoders.com/101/101741.jpg") 
-    background_image = db.Column(db.String(256), nullable=False, default="") #! Delete
     
     # Social Media Links
     facebook = db.Column(db.String(128), nullable=False, default="")
     spotify = db.Column(db.String(128), nullable=False, default="")
     youtube = db.Column(db.String(128), nullable=False, default="")
     twitter = db.Column(db.String(128), nullable=False, default="")
+
+    email_confirmed = db.Column(db.Boolean, default=False)
 
 
     def check_username(self, username):

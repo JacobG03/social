@@ -1,6 +1,7 @@
+from flask.wrappers import Response
 from flask_login.utils import logout_user
 from app import app, db, s, mail
-from flask import render_template, request, jsonify, redirect, url_for
+from flask import render_template, request, jsonify, redirect, url_for, session
 from flask_login import current_user, login_user, logout_user
 from app.models import User
 from app.forms import RegistrationForm, LoginForm
@@ -24,6 +25,8 @@ from itsdangerous import SignatureExpired
 #* be saved and have its own link as weuphere.com/posts/bielsko/<id>
 
 
+
+
 @app.route('/', methods=['POST', 'GET'])
 def index():
     return render_template('index.html', user=current_user)
@@ -39,38 +42,38 @@ def settings():
     return render_template('settings.html', user=current_user, title='Settings')
 
 
+def sendEmail(email):
+    token = s.dumps(email, salt='email-confirm')
+
+    msg = Message('Confirm Email', sender='jaqobek1995@gmail.com', recipients=[email])
+
+    link = url_for('confirm_email', token=token, _external=True)
+
+    msg.body = 'Your link is {}'.format(link)
+
+    mail.send(msg)
 
 
 @app.get('/register')
 @app.post('/register')
 def register():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
+    if not request.args:
+        if current_user.is_authenticated:
+            return redirect(url_for('index'))
 
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
-        user.set_password(form.password.data)
-        user.online = True
-        db.session.add(user)
-        db.session.commit()
+        form = RegistrationForm()
+        if form.validate_on_submit():
+            user = User(username=form.username.data, email=form.email.data)
+            user.set_password(form.password.data)
+            user.online = True
+            db.session.add(user)
+            db.session.commit()
 
-        #Wrap this code in a function
-        email = form.email.data
-        token = s.dumps(email, salt='email-confirm')
+            sendEmail(form.email.data)
 
-        msg = Message('Confirm Email', sender='jaqobek1995@gmail.com', recipients=[email])
+            login_user(user, remember=False)
 
-        link = url_for('confirm_email', token=token, _external=True)
-
-        msg.body = 'Your link is {}'.format(link)
-
-        mail.send(msg)
-
-        login_user(user, remember=False)
-
-        return redirect(url_for('confirmation_link'))
-    return render_template('register.html', form=form, title='Register')
+        return render_template('register.html', form=form, title='Register')
 
 
 @app.route('/confirm_email/<token>')
@@ -79,12 +82,11 @@ def confirm_email(token):
         email = s.loads(token, salt='email-confirm', max_age=1800)
     except SignatureExpired:
         return '<h1>The token is expired!</h1>'
+
+    current_user.email_confirmed = True
+    db.session.add(current_user)
+    db.session.commit()
     return '<h1>The token works!</h1>'
-
-
-@app.get('/confirmation_link')
-def confirmation_link():
-    return render_template('confirmation_link.html', title='Confirm link')
 
 
 @app.get('/login')
@@ -125,7 +127,6 @@ def defaultUsers():
             "hobbies": user.hobbies,
             "paramaters": user.paramaters,
             "profile_image": user.profile_image, #! Links
-            "background_image": user.background_image, #! Delete
             "facebook": user.facebook,
             "twitter": user.twitter,
             "youtube": user.youtube,

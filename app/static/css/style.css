@@ -82,14 +82,18 @@ select {
 /* ------------------- */
 
 :root {
-	--main: #3AAFA9;
-	--main2: #349d98;
-	--main3: #2e8c87;
-    --secondary2: #2B7A78;
-    --secondary: #17252A;
-    --third: #FEFFFF;
-    --secondary3: #DEF2F1;
-    --border: 2px solid var(--secondary2);
+	--bg-color: #212135;
+	--bg-color-lighter: #373749;
+    --main-color: #be3c88;
+    --caret-color: #78c729;
+    --sub-color: #19b3b8;
+    --text-color: #838686;
+	--text-color-important: #e5e5e5;
+    --error-color: #ca4754;
+    --error-extra-color: #7e2a33;
+    --colorful-error-color: #ca4754;
+    --colorful-error-extra-color: #7e2a33;
+    --border: 2px solid var(--bg-color-lighter);
     --border-radius: 8px;
     --speed: 500ms;
     font-size: 16px;
@@ -124,7 +128,12 @@ select {
 
 
 body {
-	background-color: var(--main);
+	margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    color: var(--text-color);
+    overflow-x: hidden;
+    background: var(--bg-color);
 }
 
 .display-grid {
@@ -139,7 +148,6 @@ body {
 	position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: var(--main2);
 }	
 
 .header {
@@ -157,7 +165,6 @@ body {
 	grid-template-rows: 1fr;
     height: 75px;
     width: 100vw;
-	background-color: var(--main);
 }
 
 
@@ -179,13 +186,9 @@ body {
 	align-items: center;
 	text-decoration: none;
 	font-size: 3.5rem;
-	color: var(--third);
+	color: var(--text-color-important);
 	border-radius: var(--border-radius);
 	transition: var(--speed);
-}
-
-.navbar-home-box a:hover {
-	background-color: var(--main2);
 }
 
 
@@ -198,7 +201,7 @@ body {
 
 
 .navbar-clickable-profile {
-	width: 100%;
+	width: max-content;
 	height: 100%;
 	display: flex;
 	justify-content: center;
@@ -210,18 +213,16 @@ body {
 
 .navbar-clickable-profile:hover {
 	cursor: pointer;
-	background-color: var(--main2);
 }
 
 .navbar-clickable-profile span {
 	font-size: 1.5rem;
-	color: var(--secondary3);
+	color: var(--text-color-important);
 }
 
 .navbar-clickable-profile img {
 	width: 64px;
 	height: 64px;
-	border: var(--border);
 	border-radius: var(--border-radius);
 	margin-left: 5px;
 }
@@ -237,12 +238,11 @@ body {
 	height: auto;
 	border-bottom-left-radius: var(--border-radius);
 	border-bottom-right-radius: var(--border-radius);
-	background-color: var(--main);
-	border: 2px solid var(--secondary2);
 	border-top: none;
 	margin-top: 0px;
 	right: 22px;
 	overflow: hidden;
+	border: 2px solid var(--bg-color-lighter);
 }
 
 
@@ -253,13 +253,12 @@ body {
 	justify-content: center;
 	align-items: center;
 	flex-direction: row;
-	color: var(--secondary3);
 	transition: var(--speed);
 	font-size: 1.3rem;
 }
 
 .navbar-profile-item:hover {
-	background-color: var(--main2);
+	background-color: var(--bg-color-lighter);
 }
 
 .navbar-profile-item a{
@@ -268,7 +267,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: var(--secondary3);
+	color: var(--text-color);
 }
 
 
@@ -315,8 +314,8 @@ body {
     outline: none;
     border: none;
     font-size: 2rem;
-    background-color: var(--secondary3);
-    color: var(--secondary2);
+    background-color: var(--text-color-important);
+    color: var(--bg-color);
 	transition: var(--speed);
 }
 
@@ -327,17 +326,18 @@ body {
     width: 140px;
     height: 50px;
     border-radius: var(--border-radius);
-	border: var(--border);
+	border: 2px solid var(--bg-color-lighter);
     outline: none;
-    background-color: var(--secondary2);
-    color: var(--secondary3);
+    background-color: var(--bg-color);
+    color: var(--text-color);
     margin-left: 5px;
     transition: var(--speed);
     font-size: 1.5rem;
 }
 
 .searchbar-button:hover {
-    background-color: var(--main);
+    background-color: var(--bg-color-lighter);
+	color: var(--text-color-important);
     cursor: pointer;
 }
 
@@ -378,7 +378,7 @@ body {
 
 .no-result-box p {
 	font-size: 3rem;
-	color: #17252A;
+	color: var(--error-color);
 }
 
 
@@ -427,7 +427,6 @@ body {
 	width: 140px;
 	height: 140px;
     border-radius: var(--border-radius);
-    border: var(--border);
     transition: var(--speed);
 }
 
@@ -436,12 +435,11 @@ div.userpage {
 	z-index: 10;
 	position: fixed;
 	display: none;
-	background-color: #2B7A78;
+	background-color: var(--bg-color);
 	width: 400px;
 	height: 600px;
 	border-radius: var(--border-radius);
-	border: 3px solid #3AAFA9;
-	filter: brightness(110%);
+	border: 3px solid var(--sub-color);
 	top: 50%;
 	left: 50%;
 	margin-top: -300px; /* Negative half of height. */
@@ -516,7 +514,7 @@ div.userpage {
 	width: 150px;
 	height: 150px;
     border-radius: var(--border-radius);
-    border: 2px solid #3AAFA9;
+    border: 2px solid var(--sub-color);
 }
 
 
@@ -573,10 +571,11 @@ div.userpage {
 	justify-content: center;
 	align-items: center;
 	transition: var(--speed);
+	border-bottom-left-radius: var(--border-radius);
 }
 
 .close-box:hover {
-	filter:invert(23);
+	background-color: var(--sub-color);
 	cursor: pointer;
 }
 
@@ -614,12 +613,11 @@ div.userpage {
 	height: 140px;
 	border: var(--border);
 	border-radius: var(--border-radius);
-	background-color: var(--secondary2);
 	transition: var(--speed);
 }
 
 .anonymous-user-content:hover {
-	background-color: var(--main);
+	background-color: var(--bg-color-lighter);
 }
 
 
@@ -629,7 +627,7 @@ div.userpage {
 	align-items: center;
 	text-decoration: none;
 	font-size: 2rem;
-	color: #FEFFFF;
+	color: var(--text-color);
 	transition: var(--speed);
 }
 
@@ -640,10 +638,13 @@ div.userpage {
 	align-items: center;
 	text-decoration: none;
 	font-size: 2rem;
-	color: #FEFFFF;
+	color: var(--text-color);
 	transition: var(--speed);
 }
 
+.register-link-box:hover, .login-link-box:hover {
+	color: var(--text-color-important);
+}
 
 .register-box {
 	position: fixed;
@@ -656,10 +657,8 @@ div.userpage {
 	left: 50%;
 	margin-top: -400px; /* Negative half of height. */
 	margin-left: -300px; /* Negative half of width. */
-	border: var(--border);
+	border: 2px solid var(--sub-color);
 	border-radius: var(--border-radius);
-	color: #FEFFFF;
-	background-color: var(--main);
 }
 
 .form-header-box {
@@ -671,7 +670,7 @@ div.userpage {
 }
 
 .form-header-box h1 {
-	color: #FEFFFF;
+	color: var(--text-color-important);
 }
 
 .register-box form {
@@ -688,14 +687,17 @@ div.userpage {
 	display: flex;
 	flex-direction: column;
 	font-size: 2rem;
+	color: var(--text-color);
 }
 
 .form-input-box input {
 	border-radius: var(--border-radius);
 	border: var(--border);
+	background-color: var(--text-color-important);
 	width: 500px;
 	height: 3rem;
 	font-size: 1.5rem;
+	color: var(--bg-color);
 }
 
 .form-input-box input:focus {
@@ -704,7 +706,6 @@ div.userpage {
 
 .form-input-box span {
 	position: absolute;
-	color: var(--secondary);
 	font-size: 1.5rem;
 	display: flex;
 	align-self: center;
@@ -722,11 +723,16 @@ div.userpage {
 .form-submit-box input {
 	border-radius: var(--border-radius);
 	border: var(--border);
+	background-color: var(--bg-color);
 	width: 120px;
 	height: 60px;
+	color: var(--text-color);
+	transition: var(--speed);
+	font-size: 1.5rem;
 }
 
 .form-submit-box input:hover {
+	background-color: var(--bg-color-lighter);
 	cursor: pointer;
 }
 
@@ -753,16 +759,17 @@ div.userpage {
 
 .form-redirect-box p {
 	font-size: 1.2rem;
-	color: #17252A;
+	color: var(--text-color);
 }
 
 .form-redirect-box a {
 	font-size: 1.2rem;
-	color: var(--third);
+	color: var(--text-color-important);
+	transition: var(--speed);
 }
 
 .form-redirect-box a:hover {
-	color: var(--third);
+	color: var(--sub-color);
 }
 
 
@@ -784,16 +791,14 @@ div.userpage {
 	align-items: center;
 	border-radius: var(--border-radius);
 	border: var(--border);
-	background-color: var(--secondary2);
+	background-color: var(--bg-color);
 	transition: var(--speed);
+	color: var(--text-color);
+	font-size: 2rem;
 }
 
 #view-more:hover {
 	cursor: pointer;
-	background-color: var(--main);
-}
-
-#view-more span {
-	color: var(--secondary3);
-	font-size: 2rem;
+	background-color: var(--bg-color-lighter);
+	color: var(--text-color-important);
 }

@@ -1,8 +1,8 @@
-"""fresh
+"""fresh table
 
-Revision ID: a87d65f54057
+Revision ID: 904be27031b6
 Revises: 
-Create Date: 2021-07-03 16:08:06.369924
+Create Date: 2021-07-14 13:38:09.079268
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'a87d65f54057'
+revision = '904be27031b6'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -32,11 +32,11 @@ def upgrade():
     sa.Column('about_me', sa.Text(), nullable=False),
     sa.Column('hobbies', sa.Text(), nullable=False),
     sa.Column('profile_image', sa.String(length=256), nullable=False),
-    sa.Column('background_image', sa.String(length=256), nullable=False),
     sa.Column('facebook', sa.String(length=128), nullable=False),
     sa.Column('spotify', sa.String(length=128), nullable=False),
     sa.Column('youtube', sa.String(length=128), nullable=False),
     sa.Column('twitter', sa.String(length=128), nullable=False),
+    sa.Column('email_confirmed', sa.Boolean(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_user_email'), 'user', ['email'], unique=True)
