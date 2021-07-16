@@ -25,8 +25,6 @@ from itsdangerous import SignatureExpired
 #* be saved and have its own link as weuphere.com/posts/bielsko/<id>
 
 
-
-
 @app.route('/', methods=['POST', 'GET'])
 def index():
     return render_template('index.html', user=current_user)

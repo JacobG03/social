@@ -312,14 +312,12 @@ body {
     height: 50px;
     border-radius: var(--border-radius);
     outline: none;
-    border: none;
+    border: var(--border);
     font-size: 2rem;
     background-color: var(--text-color-important);
     color: var(--bg-color);
 	transition: var(--speed);
 }
-
-
 
 .searchbar-button {
 	display: block;
@@ -395,12 +393,12 @@ body {
 	grid-row: 1 / 2;
 	z-index: 3;
 	display: block;	
-	width: 36px;
-	height: 36px;
+	width: 30px;
+	height: 30px;
 	border-radius: 50%;
-	border: 3px solid var(--secondary2);
-	background-color: var(--main);
-	margin: 107px;
+	border: 3px solid var(--bg-color);
+	background-color: var(--sub-color);
+	margin: 115px;
 	transition: var(--speed);
 	filter: brightness(120%);
 }
@@ -435,11 +433,11 @@ div.userpage {
 	z-index: 10;
 	position: fixed;
 	display: none;
-	background-color: var(--bg-color);
+	background-color: var(--bg-color-lighter);
 	width: 400px;
 	height: 600px;
 	border-radius: var(--border-radius);
-	border: 3px solid var(--sub-color);
+	border: 2px solid var(--sub-color);
 	top: 50%;
 	left: 50%;
 	margin-top: -300px; /* Negative half of height. */
