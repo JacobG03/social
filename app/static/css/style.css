@@ -36,7 +36,9 @@ html:focus-within {
 
 /* Set core body defaults */
 body {
-  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
 }
@@ -89,6 +91,7 @@ select {
     --sub-color: #19b3b8;
     --text-color: #838686;
 	--text-color-important: #e5e5e5;
+	--online-color: #31a24c;
     --error-color: #ca4754;
     --error-extra-color: #7e2a33;
     --colorful-error-color: #ca4754;
@@ -145,11 +148,6 @@ body {
 	display: block !important;
 }
 
-.container {
-	position: fixed;
-    width: 100vw;
-    height: 100vh;
-}	
 
 .header {
     height: 150px;
@@ -401,7 +399,7 @@ body {
 	height: 30px;
 	border-radius: 50%;
 	border: 3px solid var(--bg-color);
-	background-color: var(--sub-color);
+	background-color: var(--online-color);
 	margin: 115px;
 	transition: var(--speed);
 	filter: brightness(120%);
