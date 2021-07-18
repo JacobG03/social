@@ -136,7 +136,6 @@ body {
     padding: 0;
     min-height: 100vh;
     color: var(--text-color);
-    overflow-x: hidden;
     background: var(--bg-color);
 }
 
@@ -654,6 +653,13 @@ div.userpage {
 .register-link-box:hover, .login-link-box:hover {
 	color: var(--text-color-important);
 }
+
+
+/* TODO */
+/** Design the register process properly */
+/** Make a content box on register page too */
+/** Position everything properly, make it scalable */
+
 
 .register-box {
 	position: fixed;

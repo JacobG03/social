@@ -293,6 +293,7 @@ var displayUserPage = function (user_id) {
     // close window if user clicks on him self again
     if (state.current == userpage && state.displayed == true) {
         userpage_element.classList.toggle('display-block');
+        user_img.style.borderRadius = '8px';
         state.displayed = false;
         state.current = '';
         // if window closed open when clicked on user
@@ -336,7 +337,7 @@ var lastUserpage = function () {
 
                 let new_user_img = document.getElementById('user-img-' + state.current.split('-')[1]);
                 new_user_img.style.borderRadius = '40px';
-                new_user_img.scrollIntoView({block: "center"});
+                new_user_img.scrollIntoView({behavior: 'smooth', block: "center"});
                 break;
             }
         } 
@@ -362,7 +363,7 @@ var nextUserpage = function () {
 
                 let new_user_img = document.getElementById('user-img-' + state.current.split('-')[1]);
                 new_user_img.style.borderRadius = '40px';
-                new_user_img.scrollIntoView({block: "center"});
+                new_user_img.scrollIntoView({behavior: 'smooth', block: "center"});
                 break;
             }
         } 
