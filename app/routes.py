@@ -1,7 +1,7 @@
 from flask.wrappers import Response
 from flask_login.utils import logout_user
 from app import app, db, s, mail
-from flask import render_template, request, jsonify, redirect, url_for, session
+from flask import render_template, request, jsonify, redirect, url_for
 from flask_login import current_user, login_user, logout_user
 from app.models import User
 from app.forms import RegistrationForm, LoginForm

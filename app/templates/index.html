@@ -1,41 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class='container'>
-    <div class='header'>
-        <div class='navbar'>
-            <div class='navbar-home-box'>
-                <a href='{{ url_for("index") }}'>We Up Here</a>
-            </div>
-            {% if user.is_authenticated %}
-            <div class='navbar-profile-box'>
-                <div class='navbar-clickable-profile' id='navbar-clickable-profile'>
-                    <span>{{ user.username }}</span>
-                    <img src='{{ user.profile_image }}'>
-                </div>
-                <div class='navbar-profile-items animate__animated animate__fadeIn animate__faster' id='navbar-profile-items'>
-                    <div class='navbar-profile-item'>
-                        <a href='{{ url_for("profile") }}'>Profile</a>
-                    </div>
-                    <div class='navbar-profile-item'>
-                        <a href='{{ url_for("settings") }}'>Settings</a>
-                    </div>
-                    <div class='navbar-profile-item'>
-                        <a href='{{ url_for("logout") }}'>Logout</a>
-                    </div>
-                </div>
-            </div>
-            {% else %}
-            <div class='navbar-login-box'>
-                <a href='{{ url_for("login") }}'>Sign In</a>
-            </div>
-            {% endif %}
+    <div class='navbar'>
+        <div class='navbar-home-box'>
+            <a href='{{ url_for("index") }}'>We Up Here</a>
         </div>
+        {% if user.is_authenticated %}
+        <div class='navbar-profile-box'>
+            <div class='navbar-clickable-profile' id='navbar-clickable-profile'>
+                <span>{{ user.username }}</span>
+                <img src='{{ user.profile_image }}'>
+            </div>
+            <div class='navbar-profile-items animate__animated animate__fadeIn animate__faster' id='navbar-profile-items'>
+                <div class='navbar-profile-item'>
+                    <a href='{{ url_for("profile") }}'>Profile</a>
+                </div>
+                <div class='navbar-profile-item'>
+                    <a href='{{ url_for("settings") }}'>Settings</a>
+                </div>
+                <div class='navbar-profile-item'>
+                    <a href='{{ url_for("logout") }}'>Logout</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class='navbar-login-box'>
+            <a href='{{ url_for("login") }}'>Sign In</a>
+        </div>
+        {% endif %}
+    </div>
+    <div class='content-box'>
         <div class='searchbar-box'>
             <input type='text' class='searchbar' id='searchbar'>
             <input type='button' class='searchbar-button' value='Search'>
         </div>
-    </div>
-    <div class='content-box'>
         <div class='content' id='content'>
             {% if user.is_anonymous %}
             <div class='anonymous-user animate__animated animate__fadeInUp'>
