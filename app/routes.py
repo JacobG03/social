@@ -1,7 +1,7 @@
-from flask.wrappers import Response
+# pyright: reportMissingImports=false
 from flask_login.utils import logout_user
 from app import app, db, s, mail
-from flask import render_template, request, jsonify, redirect, url_for
+from flask import render_template, request, jsonify, redirect, url_for, Response
 from flask_login import current_user, login_user, logout_user
 from app.models import User
 from app.forms import RegistrationForm, LoginForm
@@ -42,13 +42,9 @@ def settings():
 
 def sendEmail(email):
     token = s.dumps(email, salt='email-confirm')
-
     msg = Message('Confirm Email', sender='jaqobek1995@gmail.com', recipients=[email])
-
     link = url_for('confirm_email', token=token, _external=True)
-
     msg.body = 'Your link is {}'.format(link)
-
     mail.send(msg)
 
 
