@@ -68,7 +68,7 @@ var usersToDisplay = 50;
 // Display users
 function renderUsers (users, amount) {
     // parent div
-    let content = document.getElementById('content');
+    let content = document.getElementById('middle-content');
     if (content) {
         for (let i = 0; i < amount; i++) {
             // Create container div
@@ -129,7 +129,7 @@ function renderUsers (users, amount) {
     
                 // Middle content
                 let middle_content = document.createElement('div');
-                middle_content.className = 'middle-content';
+                middle_content.className = 'userpage-middle-content';
                 main_content.appendChild(middle_content);
     
                 // Profile pic box
@@ -391,7 +391,7 @@ document.addEventListener('keydown', function(event) {
 
 
 function getFilteredUsers(search_string) {
-    let content = document.getElementById('content');
+    let content = document.getElementById('middle-content');
     let searchbar = document.getElementById('searchbar');
     state.current = '';
     state.displayed = false;
@@ -436,7 +436,7 @@ function getFilteredUsers(search_string) {
 
 
 function clearUsers() {
-    let content = document.getElementById('content');
+    let content = document.getElementById('middle-content');
     while (content.firstChild) {
         content.firstChild.remove()
     }
