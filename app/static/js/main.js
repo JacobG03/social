@@ -39,9 +39,13 @@ const getDefaultData = async () => {
         let dev = 'http://127.0.0.1:5000/api/users';
     
         if (window.location.hostname == "127.0.0.1") {
-            var response = await fetch(dev);
+            var response = await fetch(dev, {
+                method: 'POST'
+            });
         } else if (window.location.hostname == "www.weuphere.com") {
-            var response = await fetch(prod);
+            var response = await fetch(prod, {
+                method: 'POST'
+            });
         } else {
            var response = 'none';
         }
