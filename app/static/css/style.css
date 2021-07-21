@@ -41,6 +41,7 @@ body {
   position: fixed;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
+  scroll-behavior: smooth;
 }
 
 /* A elements that don't have a class get default styles */
@@ -137,6 +138,7 @@ body {
     min-height: 100vh;
     color: var(--text-color);
     background: var(--bg-color);
+	scroll-behavior: smooth;
 }
 
 .display-grid {
@@ -370,6 +372,7 @@ body {
     width: 90%;
     height: 100%;
 	overflow-y: scroll;
+	scroll-behavior: smooth;
 }
 
 

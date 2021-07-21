@@ -128,7 +128,7 @@ function renderUsers (users, amount) {
                 let arrow_img = document.createElement('img');
                 arrow_img.className = 'left-arrow-img';
                 arrow_img.src = window.location.href + 'static/img/button-icons/left-arrow.png';
-                arrow_img.addEventListener('click', lastUserpage, false)
+                arrow_img.addEventListener('click', lastUserpage, false);
                 arrow_box_left.appendChild(arrow_img);
     
                 // Middle content
@@ -317,6 +317,7 @@ var displayUserPage = function (user_id) {
     }
 }
 
+
 var lastUserpage = function () {
     // TODO
     // get array of userpages
@@ -356,7 +357,7 @@ var nextUserpage = function () {
                 let current_userpage = document.getElementById(state.current);
                 let current_user_img = document.getElementById('user-img-' + state.current.split('-')[1]);
                 current_user_img.style.borderRadius = '8px';
-                current_userpage.classList.remove('animate__fadeInLeft', 'animate__fadeInRight')
+                current_userpage.classList.remove('animate__fadeInLeft', 'animate__fadeInRight');
                 current_userpage.classList.toggle('display-block');
                 
                 let new_userpage = document.getElementById(userpages[i + 1].id);
@@ -366,13 +367,23 @@ var nextUserpage = function () {
                 state.current = userpages[i + 1].id;
 
                 let new_user_img = document.getElementById('user-img-' + state.current.split('-')[1]);
-                new_user_img.style.borderRadius = '40px';
                 new_user_img.scrollIntoView({behavior: 'smooth', block: "center"});
+                new_user_img.style.borderRadius = '40px';
                 break;
             }
-        } 
+        }
     }
 }
+
+
+document.addEventListener('keydown', function(event) {
+    if (event.keyCode == 37 && state.displayed) {
+        lastUserpage();
+    }
+    else if (event.keyCode == 39 && state.displayed) {
+        nextUserpage();
+    }
+})
 
 
 var hideUserPageOnX = function () {
@@ -385,14 +396,6 @@ var hideUserPageOnX = function () {
 }
 
 // Arrow input for chaning userpages
-document.addEventListener('keydown', function(event) {
-    if (event.keyCode == 37 && state.displayed) {
-        lastUserpage();
-    }
-    else if (event.keyCode == 39 && state.displayed) {
-        nextUserpage();
-    }
-})
 
 
 function getFilteredUsers(search_string) {
@@ -450,6 +453,7 @@ function clearUsers() {
 
 window.onload = function() {
     // Listen for search input
+
     const searchbar = document.getElementById('searchbar');
     
     if (searchbar) {
